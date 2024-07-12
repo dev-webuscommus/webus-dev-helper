@@ -1,0 +1,19 @@
+{
+    "name": "webus/webus-dev-helper",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^9.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Webus\\WebusDevHelper\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "soolimy",
+            "email": "plaredspear@gmail.com"
+        }
+    ],
+    "require": {}
+}
