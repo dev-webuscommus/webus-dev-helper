@@ -1,5 +1,5 @@
 {
-    "name": "webus/webus-dev-helper",
+    "name": "dev-webuscomms/webus-dev-helper",
     "type": "library",
     "minimum-stability": "stable",
     "prefer-stable": true,
