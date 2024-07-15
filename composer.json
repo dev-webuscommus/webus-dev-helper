@@ -2,14 +2,20 @@
     "name": "dev-webuscommus/webus-dev-helper",
     "type": "library",
     "minimum-stability": "stable",
-    "prefer-stable": true,
-    "require-dev": {
-        "phpunit/phpunit": "^9.6"
+    "prefer-stable": false,
+    "require": {
+        "phpunit/phpunit": "^9.6",
+        "ext-pdo": "*"
     },
     "autoload": {
-        "psr-4": {
-            "Webus\\WebusDevHelper\\": "src/"
-        }
+        "classmap": [
+            "src/"
+        ]
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/"
+        ]
     },
     "authors": [
         {
@@ -17,5 +23,7 @@
             "email": "plaredspear@gmail.com"
         }
     ],
-    "require": {}
+    "scripts": {
+        "test": "phpunit tests"
+    }
 }
