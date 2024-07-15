@@ -50,6 +50,21 @@ class MockHelper
         return $mockPdo;
     }
 
+    public static function mockPdoForLastInsertId(TestCase $testCase, string $sql, array $sqlParams, string|false $lastInsertId): MockObject
+    {
+        $statement = self::mockPDOStatementExecute($testCase, $sqlParams);
+
+        $mockPdo = self::mockPdoForPrepare($testCase, $statement, $sql);
+        $mockPdo->expects($testCase->once())
+            ->method('lastInsertId')
+            ->willReturn($lastInsertId);
+
+        return $mockPdo;
+    }
+
+
+    /************ PRIVATE *******************/
+
     private static function mockPdoForPrepare(TestCase $testCase, $statement, $args = null): MockObject
     {
         $mockPdo = $testCase->getMockBuilder(PDO::class)

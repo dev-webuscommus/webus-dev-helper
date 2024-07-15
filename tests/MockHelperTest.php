@@ -74,4 +74,27 @@ class MockHelperTest extends TestCase
         $this->assertInstanceOf(MockObject::class, $mockPdo);
         $this->assertEquals($result, $mockUserList);
     }
+
+    public function testMockPdoForLastInsertId()
+    {
+        // given
+        $lastInsertId = '7';
+        $name = 'DEV';
+
+        $sql = "INSERT INTO users SET name = ?";
+        $sqlParams = [$name];
+
+        // when
+        $mockPdo = MockHelper::mockPdoForLastInsertId($this, $sql, $sqlParams, $lastInsertId);
+
+        $stmt = $mockPdo->prepare($sql);
+        $stmt->execute($sqlParams);
+        $result = $mockPdo->lastInsertId();
+
+        // then
+        $this->assertInstanceOf(MockObject::class, $mockPdo);
+        $this->assertEquals($result, $lastInsertId);
+    }
+
+
 }
