@@ -9,6 +9,13 @@ use PHPUnit\Framework\TestCase;
 
 class MockHelper
 {
+    public static function mockPdoForDefault(TestCase $testCase, string $sql, array $sqlParams): MockObject
+    {
+        $statement = self::mockPDOStatementExecute($testCase, $sqlParams);
+
+        return self::mockPdoForPrepare($testCase, $statement, $sql);
+    }
+
     public static function mockPdoForFetch(TestCase $testCase, string $sql, array $sqlParams, $returnValue): MockObject
     {
         $statement = self::mockPDOStatementExecute($testCase, $sqlParams);

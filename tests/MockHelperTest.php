@@ -11,6 +11,24 @@ class MockHelperTest extends TestCase
         $this->assertInstanceOf(MockHelper::class, new MockHelper());
     }
 
+    public function testMockPdoForDefault()
+    {
+        // given
+        $name = 'NAME';
+
+        $sql = "INSERT INTO users SET name = ?";
+        $sqlParams = [$name];
+
+        // when
+        $mockPdo = MockHelper::mockPdoForDefault($this, $sql, $sqlParams);
+
+        $stmt = $mockPdo->prepare($sql);
+        $stmt->execute($sqlParams);
+
+        // then
+        $this->assertInstanceOf(MockObject::class, $mockPdo);
+    }
+
     public function testMockPdoForFetch()
     {
         // given
