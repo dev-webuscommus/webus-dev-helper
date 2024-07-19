@@ -5,7 +5,8 @@
     "prefer-stable": false,
     "require": {
         "phpunit/phpunit": "^9.6",
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "phpspec/prophecy": "^1.19"
     },
     "autoload": {
         "classmap": [
