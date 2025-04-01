@@ -36,6 +36,15 @@ class MockHelper
         return self::mockPdoForQuery($testCase, $sql, $mockStmt);
     }
 
+    public static function mockPdoForFetchAllWithParams(TestCase $testCase, $sql, $sqlParams, $returnValue): MockObject
+    {
+        $mockStmt = self::mockPDOStatementExecute($testCase, $sqlParams);
+        $mockStmt->expects($testCase->once())
+            ->method('fetchAll')
+            ->willReturn($returnValue);
+        return self::mockPdoForPrepare($testCase, $mockStmt, $sql);
+    }
+
     public static function mockPdoForQuery(
         TestCase $testCase,
         string $sql,

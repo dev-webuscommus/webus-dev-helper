@@ -75,6 +75,36 @@ class MockHelperTest extends TestCase
         $this->assertEquals($result, $mockUserList);
     }
 
+    public function testMockPdoForFetchAllWithParams()
+    {
+        // given
+        $mockUserList = [
+            [
+                'id' => 1,
+                'name' => 'dev',
+            ],
+        ];
+
+        $sql = "SELECT * FROM users WHERE name = ?";
+        $sqlParams = ['name' => 'dev'];
+
+        // when
+        $mockPdo = MockHelper::mockPdoForFetchAllWithParams(
+            $this,
+            $sql,
+            $sqlParams,
+            $mockUserList
+        );
+
+        $stmt = $mockPdo->prepare($sql);
+        $stmt->execute($sqlParams);
+        $result = $stmt->fetchAll();
+
+        // then
+        $this->assertInstanceOf(MockObject::class, $mockPdo);
+        $this->assertEquals($result, $mockUserList);
+    }
+
     public function testMockPdoForLastInsertId()
     {
         // given
