@@ -36,8 +36,11 @@ class MockHelper
         return self::mockPdoForQuery($testCase, $sql, $mockStmt);
     }
 
-    public static function mockPdoForQuery(TestCase $testCase, string $sql, PDOStatement $returnPDOStatement): MockObject
-    {
+    public static function mockPdoForQuery(
+        TestCase $testCase,
+        string $sql,
+        PDOStatement $returnPDOStatement
+    ): MockObject {
         $mockPdo = $testCase->getMockBuilder(PDO::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -50,8 +53,12 @@ class MockHelper
         return $mockPdo;
     }
 
-    public static function mockPdoForLastInsertId(TestCase $testCase, string $sql, array $sqlParams, string|false $lastInsertId): MockObject
-    {
+    public static function mockPdoForLastInsertId(
+        TestCase $testCase,
+        string $sql,
+        array $sqlParams,
+        string|false $lastInsertId
+    ): MockObject {
         $statement = self::mockPDOStatementExecute($testCase, $sqlParams);
 
         $mockPdo = self::mockPdoForPrepare($testCase, $statement, $sql);
@@ -85,8 +92,11 @@ class MockHelper
         return $mockPdo;
     }
 
-    private static function mockPDOStatementExecute(TestCase $testCase, array|null $sqlParams, bool $returnValue = true): MockObject
-    {
+    private static function mockPDOStatementExecute(
+        TestCase $testCase,
+        array|null $sqlParams,
+        bool $returnValue = true
+    ): MockObject {
         $statement = self::mockPDOStatement($testCase);
 
         if ($sqlParams === null) {
